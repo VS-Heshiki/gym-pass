@@ -1,6 +1,7 @@
 import { UserAlreadyExistsError } from '@/data/errors'
 import { CreateUser } from '@/domain/contracts'
 import { UserRepository } from '@/infra/repositories/user-repository'
+
 import { hash } from 'bcryptjs'
 
 export class CreateUserService implements CreateUser {
