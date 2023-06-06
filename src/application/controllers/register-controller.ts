@@ -1,25 +1,26 @@
-import { prisma } from '@/data'
+import { CreateUserService } from '@/data/services/create-user-service'
+import { PrismaUsersRepository } from '@/infra/prisma/prisma-users-repository'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function register (request: FastifyRequest, reply: FastifyReply) {
-    const registerUserSchema = z.object({
+    const createUserSchema = z.object({
         name: z.string().min(3),
         email: z.string().email(),
         phone: z.string(),
         password: z.string().min(6)
     })
 
-    const { name, email, phone, password } = registerUserSchema.parse(request.body)
+    const data = createUserSchema.parse(request.body)
 
-    await prisma.user.create({
-        data: {
-            name,
-            email,
-            phone,
-            password_hash: password
-        }
-    })
+    try {
+        const userRepository = new PrismaUsersRepository()
+        const create = new CreateUserService(userRepository)
+
+        await create.execute(data)
+    } catch (err) {
+        return reply.status(409).send()
+    }
 
     return reply.status(201).send()
 }
