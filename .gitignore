@@ -6,3 +6,6 @@ dist
 
 #ENVIRONMENT
 .env
+
+#coverage
+coverage
