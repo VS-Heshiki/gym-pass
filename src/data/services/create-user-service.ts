@@ -1,3 +1,4 @@
+import { UserAlreadyExistsError } from '@/data/errors'
 import { CreateUser } from '@/domain/contracts'
 import { UserRepository } from '@/infra/repositories/user-repository'
 import { hash } from 'bcryptjs'
@@ -11,7 +12,7 @@ export class CreateUserService implements CreateUser {
         const isValid = await this.userRepository.findByEmail(email)
 
         if (isValid) {
-            throw new Error('Email already registered')
+            throw new UserAlreadyExistsError()
         }
 
         await this.userRepository.create({ name, email, phone, password_hash })

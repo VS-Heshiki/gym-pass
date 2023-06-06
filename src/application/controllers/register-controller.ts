@@ -1,3 +1,4 @@
+import { UserAlreadyExistsError } from '@/data/errors'
 import { CreateUserService } from '@/data/services/create-user-service'
 import { PrismaUsersRepository } from '@/infra/prisma/prisma-users-repository'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -19,7 +20,9 @@ export async function register (request: FastifyRequest, reply: FastifyReply) {
 
         await create.execute(data)
     } catch (err) {
-        return reply.status(409).send()
+        if (err instanceof UserAlreadyExistsError) {
+            return reply.status(409).send({ error: err.message })
+        }
     }
 
     return reply.status(201).send()
