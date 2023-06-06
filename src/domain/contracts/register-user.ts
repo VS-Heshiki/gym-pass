@@ -1,10 +1,10 @@
 import { User } from '@prisma/client'
 
-export interface CreateUser {
-    execute (params: CreateUser.Input): Promise<User>
+export interface RegisterUser {
+    execute (params: RegisterUser.Input): Promise<User>
 }
 
-export namespace CreateUser {
+export namespace RegisterUser {
     export type Input = {
         name: string
         email: string

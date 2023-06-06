@@ -13,7 +13,7 @@ describe('AuthUser Service', () => {
 
     beforeEach(async () => {
         userRepositoryStub = new PrismaUsersRepositoryMock()
-        await userRepositoryStub.create({
+        await userRepositoryStub.register({
             name: 'John Doe',
             email: 'john_doe@example.com',
             phone: '99999-9999',

@@ -3,7 +3,7 @@ import { UserRepository } from '@/infra/repositories'
 import { Prisma, User } from '@prisma/client'
 
 export class PrismaUsersRepository implements UserRepository {
-    async create (data: Prisma.UserCreateInput): Promise<User> {
+    async register (data: Prisma.UserCreateInput): Promise<User> {
         const user = await prisma.user.create({
             data
         })

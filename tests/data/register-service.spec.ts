@@ -1,5 +1,5 @@
-import { CreateUserService } from '@/data/services'
-import { CreateUser } from '@/domain/contracts'
+import { RegisterUserService } from '@/data/services'
+import { RegisterUser } from '@/domain/contracts'
 import { PrismaUsersRepositoryMock } from '../mocks/data/prisma-users-repository.mock'
 import { UserAlreadyExistsError } from '@/data/errors'
 
@@ -8,10 +8,10 @@ import { compare } from 'bcryptjs'
 
 
 
-describe('CreateUser Service', () => {
-    let sut: CreateUserService
+describe('RegisterUser Service', () => {
+    let sut: RegisterUserService
     let userRepositoryStub: PrismaUsersRepositoryMock
-    let user: CreateUser.Input
+    let user: RegisterUser.Input
 
     beforeAll(() => {
         user = ({
@@ -24,7 +24,7 @@ describe('CreateUser Service', () => {
 
     beforeEach(() => {
         userRepositoryStub = new PrismaUsersRepositoryMock()
-        sut = new CreateUserService(userRepositoryStub)
+        sut = new RegisterUserService(userRepositoryStub)
     })
 
     it('should hash user password upon registration', async () => {

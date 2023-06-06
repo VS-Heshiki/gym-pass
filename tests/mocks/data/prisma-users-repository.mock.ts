@@ -4,7 +4,7 @@ import { Prisma, User } from '@prisma/client'
 export class PrismaUsersRepositoryMock implements UserRepository {
     public users: User[] = []
 
-    async create (data: Prisma.UserCreateInput): Promise<User> {
+    async register (data: Prisma.UserCreateInput): Promise<User> {
         const user = ({
             id: 'Any_Id',
             name: data.email,
