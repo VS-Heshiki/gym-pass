@@ -41,4 +41,10 @@ describe('CreateUser Service', () => {
 
         await expect(promise).rejects.toBeInstanceOf(UserAlreadyExistsError)
     })
+
+    it('should be able register a user on success', async () => {
+        const member = await sut.execute(user)
+
+        expect(member.id).toEqual(expect.any(String))
+    })
 })
