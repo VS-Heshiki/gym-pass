@@ -1,5 +1,7 @@
+import { User } from '@prisma/client'
+
 export interface CreateUser {
-    execute (params: CreateUser.Input): Promise<void>
+    execute (params: CreateUser.Input): Promise<User>
 }
 
 export namespace CreateUser {

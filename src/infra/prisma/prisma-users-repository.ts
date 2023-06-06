@@ -3,10 +3,11 @@ import { UserRepository } from '@/infra/repositories'
 import { Prisma, User } from '@prisma/client'
 
 export class PrismaUsersRepository implements UserRepository {
-    async create (data: Prisma.UserCreateInput): Promise<void> {
-        await prisma.user.create({
+    async create (data: Prisma.UserCreateInput): Promise<User> {
+        const user = await prisma.user.create({
             data
         })
+        return user
     }
 
     async findByEmail (email: string): Promise<User | null> {
@@ -16,6 +17,6 @@ export class PrismaUsersRepository implements UserRepository {
             }
         })
 
-        return user
+        return user || null
     }
 }
