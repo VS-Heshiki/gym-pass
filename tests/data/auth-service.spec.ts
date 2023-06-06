@@ -34,4 +34,10 @@ describe('AuthUser Service', () => {
 
         await expect(promise).rejects.toBeInstanceOf(InvalidCredentialsError)
     })
+
+    it('should be able to authenticate', async () => {
+        const resolve = await sut.execute({ email: 'john_doe@example.com', password: '123456' })
+
+        expect(resolve.id).toEqual(expect.any(String))
+    })
 })
