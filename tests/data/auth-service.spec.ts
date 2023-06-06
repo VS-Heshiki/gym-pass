@@ -1,9 +1,8 @@
 import { AuthUserService } from '@/data/services'
 import { PrismaUsersRepositoryMock } from '../mocks/data/prisma-users-repository.mock'
-import { AuthUser } from '@/domain/contracts'
 
-import { describe, it, expect, beforeAll, beforeEach } from 'vitest'
-import { compare, hashSync } from 'bcryptjs'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { hashSync } from 'bcryptjs'
 import { InvalidCredentialsError } from '@/data/errors'
 
 
