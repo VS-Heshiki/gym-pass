@@ -13,7 +13,7 @@ export class CreateUserService implements CreateUser {
 
         const userEmail = await this.userRepository.findByEmail(email)
 
-        if (userEmail !== null) {
+        if (userEmail) {
             throw new UserAlreadyExistsError()
         }
 

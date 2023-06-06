@@ -7,7 +7,7 @@
         "start": "node dist/server.js",
         "dev": "tsx watch src/server.ts",
         "build": "tsup src",
-        "test": "vitest run",
+        "test": "vitest --run",
         "test:watch": "vitest"
     },
     "keywords": [],

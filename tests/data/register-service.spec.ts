@@ -1,6 +1,7 @@
 import { CreateUserService } from '@/data/services'
 import { CreateUser } from '@/domain/contracts'
 import { PrismaUsersRepositoryMock } from '../mocks/data/prisma-users-repository.mock'
+import { UserAlreadyExistsError } from '@/data/errors'
 
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest'
 import { compare } from 'bcryptjs'
@@ -13,7 +14,6 @@ describe('CreateUser Service', () => {
     let user: CreateUser.Input
 
     beforeAll(() => {
-        userRepositoryStub = new PrismaUsersRepositoryMock()
         user = ({
             name: 'John Doe',
             email: 'john.doe@example.com',
@@ -23,6 +23,7 @@ describe('CreateUser Service', () => {
     })
 
     beforeEach(() => {
+        userRepositoryStub = new PrismaUsersRepositoryMock()
         sut = new CreateUserService(userRepositoryStub)
     })
 
@@ -32,5 +33,12 @@ describe('CreateUser Service', () => {
         const hashed = await compare('123456', resolve.password_hash)
 
         expect(hashed).toBeTruthy()
+    })
+
+    it('should not allow registrate with same email twice', async () => {
+        await sut.execute(user)
+        const promise = sut.execute(user)
+
+        await expect(promise).rejects.toBeInstanceOf(UserAlreadyExistsError)
     })
 })
