@@ -28,4 +28,10 @@ describe('AuthUser Service', () => {
 
         await expect(promise).rejects.toBeInstanceOf(InvalidCredentialsError)
     })
+
+    it('should prevent user to authenticate with wrong password', async () => {
+        const promise = sut.execute({ email: 'john_doe@example.com', password: '654321' })
+
+        await expect(promise).rejects.toBeInstanceOf(InvalidCredentialsError)
+    })
 })
