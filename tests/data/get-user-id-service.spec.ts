@@ -8,7 +8,7 @@ import { User } from '@prisma/client'
 
 
 
-describe('AuthUser Service', () => {
+describe('GetUserById Service', () => {
     let sut: GetUserByIdService
     let userRepositoryStub: PrismaUsersRepositoryMock
     let user: User
