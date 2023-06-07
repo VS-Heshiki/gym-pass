@@ -35,7 +35,7 @@ describe('AuthUser Service', () => {
         })
     })
 
-    it('should not be able if user id not found', async () => {
+    it('should refuse if user id not found', async () => {
         const resolve = sut.execute({ userId: 'non-exists-id' })
 
         await expect(resolve).rejects.toBeInstanceOf(ResourceNotFoundError)
