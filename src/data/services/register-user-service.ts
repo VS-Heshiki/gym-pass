@@ -1,6 +1,6 @@
 import { UserAlreadyExistsError } from '@/data/errors'
 import { RegisterUser } from '@/domain/contracts'
-import { UserRepository } from '@/infra/repositories/user-repository'
+import { UserRepository } from '@/infra/repositories'
 import { User } from '@prisma/client'
 
 import { hash } from 'bcryptjs'

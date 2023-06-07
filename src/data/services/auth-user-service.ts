@@ -1,6 +1,6 @@
 import { InvalidCredentialsError } from '@/data/errors'
 import { AuthUser } from '@/domain/contracts'
-import { UserRepository } from '@/infra/repositories/user-repository'
+import { UserRepository } from '@/infra/repositories'
 import { User } from '@prisma/client'
 
 import { compare } from 'bcryptjs'

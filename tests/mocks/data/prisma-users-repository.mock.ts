@@ -7,7 +7,7 @@ export class PrismaUsersRepositoryMock implements UserRepository {
     async register (data: Prisma.UserCreateInput): Promise<User> {
         const user = ({
             id: 'Any_Id',
-            name: data.email,
+            name: data.name,
             email: data.email,
             phone: data.phone,
             password_hash: data.password_hash,
@@ -21,6 +21,15 @@ export class PrismaUsersRepositoryMock implements UserRepository {
 
     async findByEmail (email: string): Promise<User | null> {
         const user = this.users.find(users => users.email === email)
+
+        if (!user) {
+            return null
+        }
+        return user
+    }
+
+    async findById (userId: string): Promise<User | null> {
+        const user = this.users.find(users => users.id === userId)
 
         if (!user) {
             return null
