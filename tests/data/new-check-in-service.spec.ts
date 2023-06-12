@@ -22,7 +22,7 @@ describe('NewCheckIn Service', () => {
         checkInRepositoryStub = new PrismaCheckInRepositoryMock()
         gymsRepositoryStub = new PrismaGymsRepositoryMock()
         sut = new NewCheckInService(checkInRepositoryStub, gymsRepositoryStub)
-        gymsRepositoryStub.gyms.push({
+        await gymsRepositoryStub.create({
             id: 'gym_id1',
             name: 'Any Gym',
             description: null,
@@ -65,9 +65,9 @@ describe('NewCheckIn Service', () => {
     it('should not be able create a new check in if user is not near the gym', async () => {
         const checkInOne = await sut.execute(data)
 
-        gymsRepositoryStub.gyms.push({
+        await gymsRepositoryStub.create({
             id: 'gym_id2',
-            name: 'Any Gym',
+            name: 'Another Gym',
             description: null,
             phone: null,
             latitude: new Decimal(-23.5146054),
