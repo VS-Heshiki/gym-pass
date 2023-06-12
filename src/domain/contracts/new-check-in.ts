@@ -8,5 +8,7 @@ export namespace NewCheckIn {
     export type Input = {
         userId: string
         gymId: string
+        userLatitude: number
+        userLongitude: number
     }
 }
