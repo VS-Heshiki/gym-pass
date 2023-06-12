@@ -18,7 +18,7 @@ GymPass app
 ## Business Rules
 
 - [✅] A user should not be able to register with duplicate email;
-- [❌] A user should not be able 2 check-ins in same day;
+- [✅] A user should not be able 2 check-ins in same day;
 - [❌] A user should not be able check-in if not near (100m) the gym;
 - [❌] Check-in must only be validated within 20 minutes of creation;
 - [❌] Check-in must only be validated only by administrators;
