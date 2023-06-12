@@ -6,8 +6,6 @@ import { UserAlreadyExistsError } from '@/data/errors'
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest'
 import { compare } from 'bcryptjs'
 
-
-
 describe('RegisterUser Service', () => {
     let sut: RegisterUserService
     let userRepositoryStub: PrismaUsersRepositoryMock

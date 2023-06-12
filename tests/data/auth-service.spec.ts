@@ -5,8 +5,6 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { hashSync } from 'bcryptjs'
 import { InvalidCredentialsError } from '@/data/errors'
 
-
-
 describe('AuthUser Service', () => {
     let sut: AuthUserService
     let userRepositoryStub: PrismaUsersRepositoryMock

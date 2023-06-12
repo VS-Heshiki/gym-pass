@@ -6,8 +6,6 @@ import { hashSync } from 'bcryptjs'
 import { ResourceNotFoundError } from '@/data/errors'
 import { User } from '@prisma/client'
 
-
-
 describe('GetUserById Service', () => {
     let sut: GetUserByIdService
     let userRepositoryStub: PrismaUsersRepositoryMock
