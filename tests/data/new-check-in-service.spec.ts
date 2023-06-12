@@ -37,4 +37,15 @@ describe('NewCheckIn Service', () => {
 
         await expect(promise).rejects.toBeInstanceOf(TwiceCheckInOnSameDate)
     })
+
+    it('should be able make two check ins on different dates', async () => {
+        vi.setSystemTime(new Date(2023, 6, 12, 8, 0, 0))
+        const checkInOne = await sut.execute(ids)
+
+        vi.setSystemTime(new Date(2023, 6, 13, 8, 0, 0))
+        const checkInTwo = await sut.execute(ids)
+
+        expect(checkInOne.id).toEqual(expect.any(String))
+        expect(checkInTwo.id).toEqual(expect.any(String))
+    })
 })
