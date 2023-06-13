@@ -7,13 +7,13 @@ GymPass app
 - [✅] Should be able register a new user;
 - [✅] Should be able authenticate;
 - [✅] Should be able get a user profile when logged;
-- [❌] Should be able get how many check-ins were made by the user;
+- [✅] Should be able get how many check-ins were made by the user;
 - [✅] Should be able user get a history of their check-ins;
-- [❌] Should be able user search gyms nearby;
-- [❌] Should be able user search gyms by name;
-- [❌] Should be able user make a check-in in a gym;
-- [❌] Should be able validate a check-in of a user;
-- [❌] Should be able register a new gym;
+- [✅] Should be able user search gyms nearby;
+- [✅] Should be able user search gyms by name;
+- [✅] Should be able user make a check-in in a gym;
+- [✅] Should be able validate a check-in of a user;
+- [✅] Should be able register a new gym;
 
 ## Business Rules
 
