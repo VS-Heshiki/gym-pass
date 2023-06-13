@@ -37,4 +37,25 @@ describe('SearchGym Service', () => {
 
         expect(gym).toHaveLength(0)
     })
+
+    it('should be able list all gyms paginated per 20', async () => {
+        for (let i = 1;i <= 22;i++) {
+            await gymsRepositoryStub.create({
+                name: `Node JS GYM ${i}`,
+                latitude: -23.5146054,
+                longitude: -46.1930931,
+            })
+        }
+
+        const pageOne = await sut.execute({ name: 'Node JS GYM', page: 1 })
+        const pageTwo = await sut.execute({ name: 'Node JS GYM', page: 2 })
+
+        console.log(pageOne)
+
+        expect(pageOne).toHaveLength(20)
+        expect(pageTwo).toEqual([
+            expect.objectContaining({ name: 'Node JS GYM 21' }),
+            expect.objectContaining({ name: 'Node JS GYM 22' })
+        ])
+    })
 })

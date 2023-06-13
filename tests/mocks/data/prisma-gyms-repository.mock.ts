@@ -32,6 +32,6 @@ export class PrismaGymsRepositoryMock implements GymRepository {
     }
 
     async searchByName (name: string, page: number): Promise<Gym[]> {
-        return this.gyms.filter(gym => gym.name === name).slice((page - 1) * 20, page * 20)
+        return this.gyms.filter(gym => gym.name.includes(name)).slice((page - 1) * 20, page * 20)
     }
 }
