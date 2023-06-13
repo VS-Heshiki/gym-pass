@@ -23,13 +23,19 @@ export class PrismaCheckInRepositoryMock implements CheckInRepository {
         return checkIn
     }
 
-    async validate (checkIn: CheckIn): Promise<CheckIn> {
+    async validate (checkIn: CheckIn): Promise<CheckIn | null> {
         const validCheckIn = this.checkIns.findIndex(check => check.id === checkIn.id)
 
         checkIn.validated_at = new Date()
 
         if (validCheckIn >= 0) {
             this.checkIns[validCheckIn] = checkIn
+        }
+
+        const timeRemaining = dayjs(checkIn.validated_at).diff(checkIn.created_at)
+
+        if (timeRemaining >= 1000 * 60 * 20) {
+            return null
         }
 
         return checkIn
