@@ -50,8 +50,6 @@ describe('SearchGym Service', () => {
         const pageOne = await sut.execute({ name: 'Node JS GYM', page: 1 })
         const pageTwo = await sut.execute({ name: 'Node JS GYM', page: 2 })
 
-        console.log(pageOne)
-
         expect(pageOne).toHaveLength(20)
         expect(pageTwo).toEqual([
             expect.objectContaining({ name: 'Node JS GYM 21' }),
