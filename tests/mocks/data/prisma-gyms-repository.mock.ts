@@ -43,8 +43,6 @@ export class PrismaGymsRepositoryMock implements GymRepository {
                 { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() }
             )
 
-            console.log(distance)
-
             return distance <= 10
         })
     }
