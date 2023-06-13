@@ -1,8 +1,8 @@
 import { ValidateCheckInService } from '@/data/services'
-import { ResourceNotFoundError } from '@/data/errors'
+import { ResourceNotFoundError, TimeExceededError } from '@/data/errors'
 import { PrismaCheckInRepositoryMock } from '../mocks/data/prisma-check-in-repository.mock'
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('ValidateCheckIn Service', () => {
     let sut: ValidateCheckInService
@@ -13,13 +13,13 @@ describe('ValidateCheckIn Service', () => {
     }
 
     beforeEach(async () => {
-        //vi.useFakeTimers()
+        vi.useFakeTimers()
         checkInRepositoryStub = new PrismaCheckInRepositoryMock()
         sut = new ValidateCheckInService(checkInRepositoryStub)
     })
 
     afterEach(() => {
-        //vi.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('should be able validate a check in', async () => {
@@ -35,5 +35,16 @@ describe('ValidateCheckIn Service', () => {
         const promise = sut.execute({ checkInId: 'invalid_check_in' })
 
         await expect(promise).rejects.toBeInstanceOf(ResourceNotFoundError)
+    })
+
+    it('should not be able validate a check in after 20 minutes of its creation', async () => {
+        vi.setSystemTime(new Date(2023, 6, 13, 8, 0, 0))
+        const checkIn = await checkInRepositoryStub.create(data)
+
+        const twentOneMinutesInMs = 1000 * 60 * 21
+        vi.advanceTimersByTime(twentOneMinutesInMs)
+        const promise = sut.execute({ checkInId: checkIn.id })
+
+        await expect(promise).rejects.toBeInstanceOf(TimeExceededError)
     })
 })
