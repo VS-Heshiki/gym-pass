@@ -41,7 +41,10 @@ export class PrismaCheckInRepositoryMock implements CheckInRepository {
     }
 
     async listManyByUserId (userId: string, page: number): Promise<CheckIn[]> {
-        const listCheckin = this.checkIns.filter(checkIn => checkIn.user_id === userId).slice((page - 1) * 20, page * 20)
-        return listCheckin
+        return this.checkIns.filter(checkIn => checkIn.user_id === userId).slice((page - 1) * 20, page * 20)
+    }
+
+    async countCheckInByUserId (userId: string): Promise<number> {
+        return this.checkIns.filter(checkIn => checkIn.user_id === userId).length
     }
 }
