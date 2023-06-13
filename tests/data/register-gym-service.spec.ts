@@ -1,4 +1,4 @@
-import { RegisterGymService } from '@/data/services/register-gym-service'
+import { RegisterGymService } from '@/data/services'
 import { RegisterGym } from '@/domain/contracts'
 import { PrismaGymsRepositoryMock } from '../mocks/data/prisma-gyms-repository.mock'
 
