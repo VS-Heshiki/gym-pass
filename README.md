@@ -8,7 +8,7 @@ GymPass app
 - [✅] Should be able authenticate;
 - [✅] Should be able get a user profile when logged;
 - [❌] Should be able get how many check-ins were made by the user;
-- [❌] Should be able user get a history of their check-ins;
+- [✅] Should be able user get a history of their check-ins;
 - [❌] Should be able user search gyms nearby;
 - [❌] Should be able user search gyms by name;
 - [❌] Should be able user make a check-in in a gym;
@@ -28,5 +28,5 @@ GymPass app
 
 - [✅] Users passwords must be encrypted;
 - [✅] Application data must be persisted in a PostgreSQL database;
-- [❌] All data lists must be paginated with 20 items per page;
+- [✅] All data lists must be paginated with 20 items per page;
 - [❌] A user must be identified by a JWT(Json Web Token);
