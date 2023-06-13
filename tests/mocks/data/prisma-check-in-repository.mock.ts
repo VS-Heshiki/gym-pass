@@ -1,7 +1,7 @@
 import { CheckInRepository } from '@/infra/repositories'
 import { CheckIn, Prisma } from '@prisma/client'
-import { randomUUID } from 'crypto'
 
+import { randomUUID } from 'node:crypto'
 import dayjs from 'dayjs'
 
 export class PrismaCheckInRepositoryMock implements CheckInRepository {
@@ -22,6 +22,28 @@ export class PrismaCheckInRepositoryMock implements CheckInRepository {
 
         return checkIn
     }
+
+    async validate (checkIn: CheckIn): Promise<CheckIn> {
+        const validCheckIn = this.checkIns.findIndex(check => check.id === checkIn.id)
+
+        checkIn.validated_at = new Date()
+
+        if (validCheckIn >= 0) {
+            this.checkIns[validCheckIn] = checkIn
+        }
+
+        return checkIn
+    }
+
+    async findById (checkInId: string): Promise<CheckIn | null> {
+        const checkIn = this.checkIns.find(checkIn => checkIn.id === checkInId)
+
+        if (!checkIn) {
+            return null
+        }
+        return checkIn
+    }
+
 
     async onSameDate (userId: string, date: Date): Promise<CheckIn | null> {
         const startOfTheDay = dayjs(date).startOf('date')
