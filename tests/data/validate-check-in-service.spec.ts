@@ -1,4 +1,5 @@
 import { ValidateCheckInService } from '@/data/services'
+import { ResourceNotFoundError } from '@/data/errors'
 import { PrismaCheckInRepositoryMock } from '../mocks/data/prisma-check-in-repository.mock'
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
@@ -28,5 +29,11 @@ describe('ValidateCheckIn Service', () => {
 
         expect(resolve.validated_at).toEqual(expect.any(Date))
         expect(checkInRepositoryStub.checkIns[0].validated_at).toEqual(expect.any(Date))
+    })
+
+    it('should not be able validate an invalid/nonexistent check in', async () => {
+        const promise = sut.execute({ checkInId: 'invalid_check_in' })
+
+        await expect(promise).rejects.toBeInstanceOf(ResourceNotFoundError)
     })
 })
