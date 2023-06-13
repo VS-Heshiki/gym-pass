@@ -25,12 +25,27 @@ describe('ListUserCheckInHistory Service', () => {
 
         const resolve = await sut.execute({ userId: 'user_01', page: 1 })
 
-        console.log(resolve)
-
         expect(resolve).toHaveLength(2)
         expect(resolve).toEqual([
             expect.objectContaining({ gym_id: 'gym_01' }),
             expect.objectContaining({ gym_id: 'gym_02' })
+        ])
+    })
+
+    it('should be able list all check in paginated per 20', async () => {
+        for (let i = 1;i <= 22;i++) {
+            await checkInRepositoryStub.create({
+                user_id: 'user_01',
+                gym_id: `gym_${i}`
+            })
+        }
+
+        const resolve = await sut.execute({ userId: 'user_01', page: 2 })
+
+        expect(resolve).toHaveLength(2)
+        expect(resolve).toEqual([
+            expect.objectContaining({ gym_id: 'gym_21' }),
+            expect.objectContaining({ gym_id: 'gym_22' })
         ])
     })
 })
