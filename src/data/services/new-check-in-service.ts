@@ -17,7 +17,7 @@ export class NewCheckInService implements NewCheckIn {
             throw new ResourceNotFoundError()
         }
 
-        const distance = await getDistanceBetweenCoordinates(
+        const distance = getDistanceBetweenCoordinates(
             ({ latitude: userLatitude, longitude: userLongitude }),
             ({ latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() })
         )

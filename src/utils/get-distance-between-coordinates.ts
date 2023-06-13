@@ -3,7 +3,7 @@ export type Coordinate = {
     longitude: number
 }
 
-export const getDistanceBetweenCoordinates = async (
+export const getDistanceBetweenCoordinates = (
     from: Coordinate,
     to: Coordinate,
 ) => {
