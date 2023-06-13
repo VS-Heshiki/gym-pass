@@ -31,4 +31,10 @@ describe('SearchGym Service', () => {
             name: 'javascript_gym'
         })])
     })
+
+    it('should be able to return [] if it does not find any gyms', async () => {
+        const gym = await sut.execute({ name: 'nodejs_gym', page: 1 })
+
+        expect(gym).toHaveLength(0)
+    })
 })
