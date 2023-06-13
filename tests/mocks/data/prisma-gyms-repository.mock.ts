@@ -1,5 +1,6 @@
 import { GymRepository } from '@/infra/repositories'
 import { Gym, Prisma } from '@prisma/client'
+
 import { randomUUID } from 'crypto'
 
 export class PrismaGymsRepositoryMock implements GymRepository {

@@ -1,5 +1,5 @@
 import { NewCheckInService } from '@/data/services'
-import { TwiceCheckInOnSameDate } from '@/data/errors'
+import { MaxDistanceError, TwiceCheckInOnSameDate } from '@/data/errors'
 import { PrismaGymsRepositoryMock } from '../mocks/data/prisma-gyms-repository.mock'
 import { PrismaCheckInRepositoryMock } from '../mocks/data/prisma-check-in-repository.mock'
 
@@ -82,6 +82,6 @@ describe('NewCheckIn Service', () => {
         })
 
         expect(checkInOne.id).toEqual(expect.any(String))
-        await expect(checkInTwo).rejects.toBeInstanceOf(Error)
+        await expect(checkInTwo).rejects.toBeInstanceOf(MaxDistanceError)
     })
 })

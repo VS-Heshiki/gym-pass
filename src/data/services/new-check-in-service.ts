@@ -1,4 +1,4 @@
-import { ResourceNotFoundError, TwiceCheckInOnSameDate } from '@/data/errors'
+import { MaxDistanceError, ResourceNotFoundError, TwiceCheckInOnSameDate } from '@/data/errors'
 import { NewCheckIn } from '@/domain/contracts'
 import { CheckInRepository, GymRepository } from '@/infra/repositories'
 import { getDistanceBetweenCoordinates } from '@/utils'
@@ -25,7 +25,7 @@ export class NewCheckInService implements NewCheckIn {
         const MAX_DISTANCE_IN_KILOMETERS = 0.1
 
         if (distance > MAX_DISTANCE_IN_KILOMETERS) {
-            throw new Error()
+            throw new MaxDistanceError
         }
 
         const checkInOnSameDate = await this.checkInRepository.onSameDate(userId, new Date())
