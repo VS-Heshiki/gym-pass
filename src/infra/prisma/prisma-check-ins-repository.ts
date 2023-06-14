@@ -1,35 +1,74 @@
 import { prisma } from '@/infra/prisma'
 import { CheckInRepository } from '@/infra/repositories'
-import { CheckIn, Prisma } from '@prisma/client'
 
+import { Prisma, CheckIn } from '@prisma/client'
 import dayjs from 'dayjs'
 
 export class PrismaCheckInsRepository implements CheckInRepository {
-    async create ({ user_id, gym_id }: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
-        const checkIn = await prisma.checkIn.create({
+    async create (params: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
+        return await prisma.checkIn.create({
+            data: params
+        })
+    }
+
+    async validate (checkIn: CheckIn): Promise<CheckIn | null> {
+        checkIn.validated_at = new Date()
+
+        const timeRemaining = dayjs(checkIn.validated_at).diff(checkIn.created_at)
+
+        if (timeRemaining >= 1000 * 60 * 20) {
+            return null
+        }
+
+        return await prisma.checkIn.update({
+            where: {
+                id: checkIn.id
+            },
             data: {
-                user_id,
-                gym_id
+                validated_at: checkIn.validated_at
             }
         })
 
-        return checkIn
+    }
+
+    async findById (checkInId: string): Promise<CheckIn | null> {
+        return await prisma.checkIn.findUnique({
+            where: {
+                id: checkInId
+            }
+        })
     }
 
     async onSameDate (userId: string, date: Date): Promise<CheckIn | null> {
         const startOfTheDay = dayjs(date).startOf('date')
         const endOfTheDay = dayjs(date).endOf('date')
 
-        const checkIn = await prisma.checkIn.findFirst({
-            where: { user_id: userId }
+        return await prisma.checkIn.findFirst({
+            where: {
+                user_id: userId,
+                created_at: {
+                    gte: startOfTheDay.toDate(),
+                    lte: endOfTheDay.toDate()
+                }
+            }
         })
+    }
 
-        const isDate = dayjs(checkIn?.created_at)
-        const isOnAnotherDate = isDate.isAfter(startOfTheDay) && isDate.isBefore(endOfTheDay)
+    async listManyByUserId (userId: string, page: number): Promise<CheckIn[]> {
+        return await prisma.checkIn.findMany({
+            where: {
+                id: userId
+            },
+            take: 20,
+            skip: (page - 1) * 20
+        })
+    }
 
-        if (!isOnAnotherDate) {
-            return null
-        }
-        return checkIn
+    async countCheckInByUserId (userId: string): Promise<number> {
+        return await prisma.checkIn.count({
+            where: {
+                id: userId
+            }
+        })
     }
 }

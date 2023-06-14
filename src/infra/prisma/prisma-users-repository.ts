@@ -1,5 +1,6 @@
 import { prisma } from '@/infra/prisma'
 import { UserRepository } from '@/infra/repositories'
+
 import { Prisma, User } from '@prisma/client'
 
 export class PrismaUsersRepository implements UserRepository {

@@ -50,7 +50,6 @@ export class PrismaCheckInRepositoryMock implements CheckInRepository {
         return checkIn
     }
 
-
     async onSameDate (userId: string, date: Date): Promise<CheckIn | null> {
         const startOfTheDay = dayjs(date).startOf('date')
         const endOfTheDay = dayjs(date).endOf('date')
