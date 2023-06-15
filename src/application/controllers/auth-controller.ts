@@ -1,10 +1,10 @@
-import { makeAuthUser } from '@/data/factories/make-auth-user'
+import { makeAuthUserService } from '@/data/factories/'
 import { InvalidCredentialsError } from '@/data/errors'
 
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function auth (request: FastifyRequest, reply: FastifyReply) {
+export const auth = async (request: FastifyRequest, reply: FastifyReply) => {
     const authSchema = z.object({
         email: z.string().email(),
         password: z.string().min(6)
@@ -13,7 +13,7 @@ export async function auth (request: FastifyRequest, reply: FastifyReply) {
     const data = authSchema.parse(request.body)
 
     try {
-        const auth = makeAuthUser()
+        const auth = makeAuthUserService()
 
         await auth.execute(data)
     } catch (err) {
