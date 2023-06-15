@@ -29,6 +29,7 @@
         "vitest-tsconfig-paths": "3.4.1"
     },
     "dependencies": {
+        "@fastify/jwt": "7.0.0",
         "@prisma/client": "4.15.0",
         "@types/bcryptjs": "2.4.2",
         "bcryptjs": "2.4.3",
