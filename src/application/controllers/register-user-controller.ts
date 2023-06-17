@@ -1,4 +1,4 @@
-import { makeRegisterUserService } from '@/data/factories/make-register-user'
+import { makeRegisterUserService } from '@/data/factories'
 import { UserAlreadyExistsError } from '@/data/errors'
 
 import { FastifyReply, FastifyRequest } from 'fastify'
