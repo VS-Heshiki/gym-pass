@@ -1,4 +1,4 @@
-import { registerGym, searchGym } from '@/application/controllers'
+import { registerGym, searchGym } from '@/application/controllers/gym'
 import { verifyJWT } from '@/application/middlewares'
 import { FastifyInstance } from 'fastify'
 

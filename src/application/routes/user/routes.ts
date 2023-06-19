@@ -1,4 +1,4 @@
-import { auth, profile, registerUser } from '@/application/controllers'
+import { auth, profile, registerUser } from '@/application/controllers/user'
 import { verifyJWT } from '@/application/middlewares'
 import { FastifyInstance } from 'fastify'
 
