@@ -6,7 +6,7 @@ import { z } from 'zod'
 export const searchGym = async (request: FastifyRequest, reply: FastifyReply) => {
     const searchGymSchema = z.object({
         query: z.string(),
-        page: z.coerce.number()
+        page: z.coerce.number().min(1).default(1)
     })
 
     const { query, page } = searchGymSchema.parse(request.query)
