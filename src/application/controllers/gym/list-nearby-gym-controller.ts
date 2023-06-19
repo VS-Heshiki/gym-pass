@@ -13,7 +13,7 @@ export const listNearbyGym = async (request: FastifyRequest, reply: FastifyReply
         })
     })
 
-    const data = listNearbySchema.parse(request.body)
+    const data = listNearbySchema.parse(request.query)
 
     const listNearby = makeListNearbyGymService()
 

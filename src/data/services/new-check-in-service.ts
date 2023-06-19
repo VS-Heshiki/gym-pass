@@ -25,7 +25,7 @@ export class NewCheckInService implements NewCheckIn {
         const MAX_DISTANCE_IN_KILOMETERS = 0.1
 
         if (distance > MAX_DISTANCE_IN_KILOMETERS) {
-            throw new MaxDistanceError
+            throw new MaxDistanceError()
         }
 
         const checkInOnSameDate = await this.checkInRepository.onSameDate(userId, new Date())
