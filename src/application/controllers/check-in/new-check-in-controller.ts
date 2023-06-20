@@ -4,19 +4,22 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export const newCheckIn = async (request: FastifyRequest, reply: FastifyReply) => {
-    const newCheckInSchema = z.object({
-        gymId: z.string().uuid(),
-        userLatitude: z.number().refine(value => {
+    const newCheckInSchemaBody = z.object({
+        userLatitude: z.coerce.number().refine(value => {
             return Math.abs(value) <= 90
         }),
-        userLongitude: z.number().refine(value => {
+        userLongitude: z.coerce.number().refine(value => {
             return Math.abs(value) <= 180
         })
     })
 
-    const { userLatitude, userLongitude } = newCheckInSchema.parse(request.body)
+    const newCheckInSchemaParams = z.object({
+        gymId: z.string().uuid(),
+    })
 
-    const { gymId } = newCheckInSchema.parse(request.params)
+    const { userLatitude, userLongitude } = newCheckInSchemaBody.parse(request.body)
+
+    const { gymId } = newCheckInSchemaParams.parse(request.params)
 
     const newCheckIn = makeNewCheckInService()
 
