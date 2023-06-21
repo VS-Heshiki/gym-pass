@@ -57,7 +57,7 @@ export class PrismaCheckInsRepository implements CheckInRepository {
     async listManyByUserId (userId: string, page: number): Promise<CheckIn[]> {
         return await prisma.checkIn.findMany({
             where: {
-                id: userId
+                user_id: userId
             },
             take: 20,
             skip: (page - 1) * 20
