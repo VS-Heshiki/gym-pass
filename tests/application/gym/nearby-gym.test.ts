@@ -13,7 +13,7 @@ describe('GET ListNearbyGYM Route', () => {
     })
 
     it('should be able search a gym by name', async () => {
-        const { token } = await requestToken(app)
+        const { token } = await requestToken(app, true)
 
         await request(app.server)
             .post('/gyms/register')

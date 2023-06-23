@@ -13,7 +13,7 @@ describe('GET SearchGYM Route', () => {
     })
 
     it('should be able search a gym by name', async () => {
-        const { token } = await requestToken(app)
+        const { token } = await requestToken(app, true)
 
         for (let i = 0;i <= 5;i++) {
             await request(app.server)

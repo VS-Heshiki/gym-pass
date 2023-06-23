@@ -13,7 +13,7 @@ describe('POST RegisterGYM Route', () => {
     })
 
     it('should be able register a gym', async () => {
-        const { token } = await requestToken(app)
+        const { token } = await requestToken(app, true)
 
         const response = await request(app.server)
             .post('/gyms/register')

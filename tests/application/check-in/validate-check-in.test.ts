@@ -18,7 +18,7 @@ describe('PATCH ValidateCheckin Route', () => {
     })
 
     it('should be able validate a check in', async () => {
-        const { token } = await requestToken(app)
+        const { token } = await requestToken(app, true)
 
         const user = await prisma.user.findFirstOrThrow()
 
