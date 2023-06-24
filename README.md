@@ -21,12 +21,12 @@ GymPass app
 - [✅] A user should not be able 2 check-ins in same day;
 - [✅] A user should not be able check-in if not near (100m) the gym;
 - [✅] Check-in must only be validated within 20 minutes of creation;
-- [❌] Check-in must only be validated only by administrators;
-- [❌] A gyms must only register by administrators;
+- [✅] Check-in must only be validated only by administrators;
+- [✅] A gyms must only register by administrators;
 
 ## NonFunctional Requeriments
 
 - [✅] Users passwords must be encrypted;
 - [✅] Application data must be persisted in a PostgreSQL database;
 - [✅] All data lists must be paginated with 20 items per page;
-- [❌] A user must be identified by a JWT(Json Web Token);
+- [✅] A user must be identified by a JWT(Json Web Token);
