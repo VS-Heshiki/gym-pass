@@ -27,6 +27,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run test:e2e:install-prisma-env
+
       - run: npm run test:e2e
         env:
           JWT_SECRET: action_test
